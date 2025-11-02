@@ -71,7 +71,7 @@ def generate_chat_completion(client, history):
     messages.append(message)
   try: 
     completion = client.chat.completions.create( # provide it the message list
-      model="llama-3.2-11b-vision-preview",
+      model="llama-3.1-8b-instant",
       messages=messages,
     )
     return completion.choices[0].message.content # returns the model's message text
@@ -94,7 +94,7 @@ def response(state: AppState, audio: tuple): # audio = recording mic input from 
     state.conversation.append({"role": "user", "content": transcription}) # adds spoken text to chat history -> assistant has full context
 
     assistant_message = generate_chat_completion(client, state.conversation) # returns the mode's next reply
-    state.conversation.append({"role": "assistant", "content": assistant_message}) # append assistant's message
+    state.conversation.append({"role": "assistant", "content": assistant_message}) # append assistant's
     print(state.conversation) # debugging
 
     os.remove(file_name)
